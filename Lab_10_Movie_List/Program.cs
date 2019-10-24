@@ -38,21 +38,26 @@ namespace Lab_10_Movie_List
 
             Console.WriteLine("Hello, which category of movies would you like to look at?");
             Movie.PrintMovieCategories(movies);
+            List<string> categories = Movie.GetMovieCategories(movies);
 
-            string userInput = ParseInput();
-            Movie.PrintMoviesByCategory(movies, userInput);
+            int userInput = ParseRange(Movie.NumOfCategories(movies));
+            Console.WriteLine();
+            Movie.PrintMoviesByCategory(movies, categories[userInput]);
         }
 
-        public static string ParseInput()
+        public static int ParseRange(int max)
         {
-            string userInput = Console.ReadLine();
-            if (userInput != "")
+            int userInput = 0;
+            bool check = int.TryParse(Console.ReadLine(), out userInput);
+
+            if (check && userInput > 0 && userInput <= max)
             {
+                userInput--;
                 return userInput;
             }
+            Console.WriteLine("\nPlease enter a valid number within range.");
+            return ParseRange(max);
 
-            Console.WriteLine("Please input something.");
-            return ParseInput();
         }
     }
 }

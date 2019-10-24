@@ -33,7 +33,7 @@ namespace Lab_10_Movie_List
             _category = category;
         }
 
-        private static List<string> GetMovieCategories(List<Movie> movies)
+        public static List<string> GetMovieCategories(List<Movie> movies)
         {
             List<string> categories = new List<string>();
             foreach (Movie movie in movies)
@@ -46,12 +46,20 @@ namespace Lab_10_Movie_List
             return categories;
         }
 
+        public static int NumOfCategories(List<Movie> movies)
+        {
+            return GetMovieCategories(movies).Count;
+        }
+
         public static void PrintMovieCategories(List<Movie> movies)
         {
             List<string> categories = new List<string>();
+            int index = 0;
             categories = GetMovieCategories(movies);
             foreach (string element in categories)
             {
+                index++;
+                Console.Write($"{index}. ");
                 Console.WriteLine(element);
             }
         }
@@ -74,11 +82,16 @@ namespace Lab_10_Movie_List
             // The CompareTo method wanted me to use StringComparison.Ordinal
             List<Movie> moviesByCat = new List<Movie>();
             moviesByCat = GetMoviesByCategory(movies, selection);
-            moviesByCat.Sort((Movie x, Movie y) => string.Compare(x.Category, y.Category, StringComparison.Ordinal));
+            moviesByCat.Sort(SortMovies);
             foreach (Movie movie in moviesByCat)
             {
                 Console.WriteLine(movie.Title);
             }
+        }
+
+        public static int SortMovies(Movie movie1, Movie movie2)
+        {
+            return String.Compare(movie1.Title, movie2.Title);
         }
         #endregion
     }
