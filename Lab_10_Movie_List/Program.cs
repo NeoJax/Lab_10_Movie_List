@@ -12,7 +12,6 @@ namespace Lab_10_Movie_List
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
             List<Movie> movies = new List<Movie>
             {
                 new Movie("The Nightmare Before Christmas", "Animated"),
@@ -36,6 +35,24 @@ namespace Lab_10_Movie_List
                 new Movie("Scott Pilgrim", "Comedy"),
                 new Movie("Shrek", "Animated")
             };
+
+            Console.WriteLine("Hello, which category of movies would you like to look at?");
+            Movie.PrintMovieCategories(movies);
+
+            string userInput = ParseInput();
+            Movie.PrintMoviesByCategory(movies, userInput);
+        }
+
+        public static string ParseInput()
+        {
+            string userInput = Console.ReadLine();
+            if (userInput != "")
+            {
+                return userInput;
+            }
+
+            Console.WriteLine("Please input something.");
+            return ParseInput();
         }
     }
 }
