@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 namespace Lab_10_Movie_List
 {
     public class Movie
@@ -30,6 +31,40 @@ namespace Lab_10_Movie_List
         {
             _title = title;
             _category = category;
+        }
+
+        public List<string> GetMovieCategories(List<Movie> movies)
+        {
+            List<string> categories = new List<string>();
+            foreach (Movie movie in movies)
+            {
+                if (!categories.Contains(movie.Category))
+                {
+                    categories.Add(movie.Category);
+                }
+            }
+            return categories;
+        }
+
+        public List<Movie> GetMoviesByCategory(List<Movie> movies, string selection)
+        {
+            List<Movie> moviesByCat = new List<Movie>();
+            foreach (Movie movie in movies)
+            {
+                if (movie.Category.ToLower() == selection.ToLower())
+                {
+                    moviesByCat.Add(movie);
+                }
+            }
+            return moviesByCat;
+        }
+
+        public void PrintMoviesByCategory(List<Movie> movies)
+        {
+            foreach (Movie movie in movies)
+            {
+                Console.WriteLine(movie.Title);
+            }
         }
         #endregion
     }
